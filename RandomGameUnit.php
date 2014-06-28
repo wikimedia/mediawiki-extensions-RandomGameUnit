@@ -203,9 +203,9 @@ function wfDisplayPoll( $poll ) {
 
 	$output .= '<div class="poll-unit-choices">';
 	foreach( $poll['choices'] as $choice ) {
-		$output .= '<a href="' . $poll_link->escapeFullURL() . '" rel="nofollow">
+		$output .= '<a href="' . htmlspecialchars( $poll_link->getFullURL() ) . '" rel="nofollow">
 				<input id="poll_choice" type="radio" value="10" name="poll_choice" onclick="location.href=\'' .
-				$poll_link->escapeFullURL() . '\'" /> ' . $choice['choice'] .
+				htmlspecialchars( $poll_link->getFullURL() ) . '\'" /> ' . $choice['choice'] .
 			'</a>';
 	}
 	$output .= '</div>
@@ -220,7 +220,7 @@ function wfDisplayQuiz( $quiz ) {
 	$quiz_title = SpecialPage::getTitleFor( 'QuizGameHome' );
 	$output = '<div class="game-unit-container">
 			<h2>' . wfMsg( 'game-unit-quiz-title' ) . '</h2>
-			<div class="quiz-unit-title"><a href="' . $quiz_title->escapeFullURL( "questionGameAction=renderPermalink&permalinkID={$quiz['id']}" ) . '" rel="nofollow">' . $quiz['text'] . '</a></div>';
+			<div class="quiz-unit-title"><a href="' . htmlspecialchars( $quiz_title->getFullURL( "questionGameAction=renderPermalink&permalinkID={$quiz['id']}" ) ) . '" rel="nofollow">' . $quiz['text'] . '</a></div>';
 
 	if( $quiz['image'] ) {
 		$quiz_image_width = $wgRandomImageSize;
@@ -234,7 +234,7 @@ function wfDisplayQuiz( $quiz ) {
 				$width = $quiz_image->getWidth();
 			}
 		}
-		$quiz_image_tag = '<a href="' . $quiz_title->escapeFullURL( "questionGameAction=renderPermalink&permalinkID={$quiz['id']}" ) . '" rel="nofollow">
+		$quiz_image_tag = '<a href="' . htmlspecialchars( $quiz_title->getFullURL( "questionGameAction=renderPermalink&permalinkID={$quiz['id']}" ) ) . '" rel="nofollow">
 		<img width="' . $width . '" alt="" src="' . $quiz_image_url . '"/></a>';
 		$output .= '<div class="quiz-unit-image">' . $quiz_image_tag . '</div>';
 	}
@@ -294,10 +294,10 @@ function wfDisplayPictureGame( $picturegame ) {
 		<div class="pg-unit-title">' . $title_text . '</div>
 		<div class="pg-unit-pictures">
 			<div onmouseout="this.style.backgroundColor = \'\'" onmouseover="this.style.backgroundColor = \'#4B9AF6\'">
-				<a href="' . $pic_game_link->escapeFullURL( 'picGameAction=renderPermalink&id=' . $picturegame['id'] . '&voteID=' . $picturegame['id'] . '&voteImage=1&key=' . $key ) . '">' . $imgOne . '</a>
+				<a href="' . htmlspecialchars( $pic_game_link->getFullURL( 'picGameAction=renderPermalink&id=' . $picturegame['id'] . '&voteID=' . $picturegame['id'] . '&voteImage=1&key=' . $key ) ) . '">' . $imgOne . '</a>
 			</div>
 			<div onmouseout="this.style.backgroundColor = \'\'" onmouseover="this.style.backgroundColor = \'#FF0000\'">
-				<a href="' . $pic_game_link->escapeFullURL( 'picGameAction=renderPermalink&id=' . $picturegame['id'] . '&voteID=' . $picturegame['id'] . '&voteImage=1&key=' . $key ) . '">' . $imgTwo . '</a>
+				<a href="' . htmlspecialchars( $pic_game_link->getFullURL( 'picGameAction=renderPermalink&id=' . $picturegame['id'] . '&voteID=' . $picturegame['id'] . '&voteImage=1&key=' . $key ) ) . '">' . $imgTwo . '</a>
 			</div>
 		</div>
 		<div class="cleared"></div>
