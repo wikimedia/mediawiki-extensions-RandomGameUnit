@@ -5,16 +5,16 @@
  *
  * @file
  * @ingroup Extensions
- * @version 2.0
+ * @version 2.1
  * @author Aaron Wright <aaron.wright@gmail.com>
  * @author David Pean <david.pean@gmail.com>
  * @author Jack Phoenix <jack@countervandalism.net>
- * @copyright Copyright © 2009-2011 Jack Phoenix <jack@countervandalism.net>
- * @link http://www.mediawiki.org/wiki/Extension:RandomGameUnit Documentation
+ * @copyright Copyright © 2009-2014 Jack Phoenix <jack@countervandalism.net>
+ * @link https://www.mediawiki.org/wiki/Extension:RandomGameUnit Documentation
  * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
  */
 
-if( !defined( 'MEDIAWIKI' ) ) {
+if ( !defined( 'MEDIAWIKI' ) ) {
 	die( "This is not a valid entry point.\n" );
 }
 
@@ -27,23 +27,22 @@ $wgRandomImageSize = 50;
 // Extension credits that will show up on Special:Version
 $wgExtensionCredits['parserhook'][] = array(
 	'name' => 'RandomGameUnit',
-	'version' => '2.0',
+	'version' => '2.1',
 	'author' => array( 'Aaron Wright', 'David Pean', 'Jack Phoenix' ),
 	'url' => 'https://www.mediawiki.org/wiki/Extension:RandomGameUnit',
 	'description' => 'Displays a randomly chosen picture game, poll or a quiz',
 );
 
 // Internationalization file
-$dir = dirname( __FILE__ ) . '/';
-$wgExtensionMessagesFiles['RandomGameUnit'] = $dir . 'RandomGameUnit.i18n.php';
+$wgMessagesDirs['RandomGameUnit'] = __DIR__ . '/i18n';
 
 $wgHooks['ParserFirstCallInit'][] = 'wfRandomCasualGame';
 
 /**
  * Set up the <randomgameunit> parser hook
  *
- * @param $parser Object: instance of Parser
- * @return Boolean: true
+ * @param Parser $parser Instance of Parser
+ * @return bool
  */
 function wfRandomCasualGame( &$parser ) {
 	$parser->setHook( 'randomgameunit', 'wfGetRandomGameUnit' );
@@ -56,42 +55,42 @@ function wfGetRandomGameUnit( $input = '', $argsv = array() ) {
 	$random_games = array();
 	$custom_fallback = '';
 
-	if( $wgRandomGameDisplay['random_poll'] ) {
+	if ( $wgRandomGameDisplay['random_poll'] ) {
 		$random_games[] = 'poll';
 	}
 
-	if( $wgRandomGameDisplay['random_quiz'] ) {
+	if ( $wgRandomGameDisplay['random_quiz'] ) {
 		$random_games[] = 'quiz';
 	}
 
-	if( $wgRandomGameDisplay['random_picturegame'] ) {
+	if ( $wgRandomGameDisplay['random_picturegame'] ) {
 		$random_games[] = 'picgame';
 	}
 
-	if( !wfRunHooks( 'RandomGameUnit', array( &$random_games, &$custom_fallback ) ) ) {
+	if ( !wfRunHooks( 'RandomGameUnit', array( &$random_games, &$custom_fallback ) ) ) {
 		wfDebug( __METHOD__ . ": RandomGameUnit hook messed up the page!\n" );
 	}
 
-	if( count( $random_games ) == 0 ) {
+	if ( count( $random_games ) == 0 ) {
 		return '';
 	}
 
 	$random_category = $random_games[array_rand( $random_games, 1 )];
 	$count = 10;
-	switch( $random_category ) {
+	switch ( $random_category ) {
 		case 'poll':
 			$polls = Poll::getPollList( $count );
-			if( $polls ) {
+			if ( $polls ) {
 				$random_poll = $polls[array_rand( $polls )];
 				return wfDisplayPoll( $random_poll );
 			}
-		break;
+			break;
 		case 'quiz':
 			$quiz = array();
 			// Try cache
-			$key = wfMemcKey( 'quiz', 'order', 'q_id' , 'count', $count );
+			$key = wfMemcKey( 'quiz', 'order', 'q_id', 'count', $count );
 			$data = $wgMemc->get( $key );
-			if( $data ) {
+			if ( $data ) {
 				wfDebugLog( 'RandomGameUnit', "Got quiz list ($count) from cache" );
 				$quiz = $data;
 			} else {
@@ -109,7 +108,7 @@ function wfGetRandomGameUnit( $input = '', $argsv = array() ) {
 					__METHOD__,
 					$params
 				);
-				foreach( $res as $row ) {
+				foreach ( $res as $row ) {
 					$quiz[] = array (
 						'id' => $row->q_id,
 						'text' => $row->q_text,
@@ -120,16 +119,16 @@ function wfGetRandomGameUnit( $input = '', $argsv = array() ) {
 				$wgMemc->set( $key, $quiz, 60 * 10 );
 			}
 			$random_quiz = $quiz[array_rand( $quiz )];
-			if( $random_quiz ) {
+			if ( $random_quiz ) {
 				return wfDisplayQuiz( $random_quiz );
 			}
-		break;
+			break;
 		case 'picgame':
 			// Try cache
 			$pics = array();
 			$key = wfMemcKey( 'picgame', 'order', 'q_id' , 'count', $count );
 			$data = $wgMemc->get( $key );
-			if( $data ) {
+			if ( $data ) {
 				wfDebugLog( 'RandomGameUnit', "Got picture game list ($count) ordered by id from cache" );
 				$pics = $data;
 			} else {
@@ -144,7 +143,7 @@ function wfGetRandomGameUnit( $input = '', $argsv = array() ) {
 					__METHOD__,
 					$params
 				);
-				foreach( $res as $row ) {
+				foreach ( $res as $row ) {
 					$pics[] = array(
 						'id' => $row->id,
 						'title' => $row->title,
@@ -156,16 +155,16 @@ function wfGetRandomGameUnit( $input = '', $argsv = array() ) {
 				$wgMemc->set( $key, $pics, 60 * 10 );
 			}
 			$random_picgame = $pics[array_rand( $pics )];
-			if( $random_picgame ) {
+			if ( $random_picgame ) {
 				return wfDisplayPictureGame( $random_picgame );
 			}
 
-		break;
+			break;
 		case 'custom':
-			if( $custom_fallback ) {
+			if ( $custom_fallback ) {
 				return call_user_func( $custom_fallback, $count );
 			}
-		break;
+			break;
 	}
 }
 
@@ -182,10 +181,10 @@ function wfDisplayPoll( $poll ) {
 
 	$poll_link = Title::makeTitle( $ns, $poll['title'] );
 	$output = '<div class="game-unit-container">
-			<h2>' . wfMsg( 'game-unit-poll-title' ) . '</h2>
+			<h2>' . wfMessage( 'game-unit-poll-title' )->plain() . '</h2>
 			<div class="poll-unit-title">' . $poll_link->getText() . '</div>';
 
-	if( $poll['image'] ) {
+	if ( $poll['image'] ) {
 		$poll_image_width = $wgRandomImageSize;
 		$poll_image = wfFindFile( $poll['image'] );
 		$poll_image_url = $width = '';
@@ -202,7 +201,7 @@ function wfDisplayPoll( $poll ) {
 	}
 
 	$output .= '<div class="poll-unit-choices">';
-	foreach( $poll['choices'] as $choice ) {
+	foreach ( $poll['choices'] as $choice ) {
 		$output .= '<a href="' . htmlspecialchars( $poll_link->getFullURL() ) . '" rel="nofollow">
 				<input id="poll_choice" type="radio" value="10" name="poll_choice" onclick="location.href=\'' .
 				htmlspecialchars( $poll_link->getFullURL() ) . '\'" /> ' . $choice['choice'] .
@@ -219,10 +218,10 @@ function wfDisplayQuiz( $quiz ) {
 
 	$quiz_title = SpecialPage::getTitleFor( 'QuizGameHome' );
 	$output = '<div class="game-unit-container">
-			<h2>' . wfMsg( 'game-unit-quiz-title' ) . '</h2>
+			<h2>' . wfMessage( 'game-unit-quiz-title' )->plain() . '</h2>
 			<div class="quiz-unit-title"><a href="' . htmlspecialchars( $quiz_title->getFullURL( "questionGameAction=renderPermalink&permalinkID={$quiz['id']}" ) ) . '" rel="nofollow">' . $quiz['text'] . '</a></div>';
 
-	if( $quiz['image'] ) {
+	if ( $quiz['image'] ) {
 		$quiz_image_width = $wgRandomImageSize;
 		$quiz_image = wfFindFile( $quiz['image'] );
 		$quiz_image_url = $width = '';
@@ -246,7 +245,7 @@ function wfDisplayQuiz( $quiz ) {
 function wfDisplayPictureGame( $picturegame ) {
 	global $wgRandomImageSize;
 
-	if( !$picturegame['img1'] || !$picturegame['img2'] ) {
+	if ( !$picturegame['img1'] || !$picturegame['img2'] ) {
 		return '';
 	}
 
@@ -254,7 +253,7 @@ function wfDisplayPictureGame( $picturegame ) {
 	if ( $picturegame['title'] == substr( $picturegame['title'], 0, 48 ) ) {
 		$title_text = $picturegame['title'];
 	} else {
-		$title_text = substr( $picturegame['title'], 0, 48 ) . wfMsg( 'ellipsis' );
+		$title_text = substr( $picturegame['title'], 0, 48 ) . wfMessage( 'ellipsis' )->escaped();
 	}
 
 	$img_one = wfFindFile( $picturegame['img1'] );
@@ -288,9 +287,9 @@ function wfDisplayPictureGame( $picturegame ) {
 	#global $wgUser;
 	#$key = md5( $picturegame['id'] . md5( $wgUser->getName() ) ); // the 2nd param should be PictureGameHome::$SALT but that is a private member variable
 
-	// @todo FIXME/CHECME: voteImage=1 seems to be just cruft in the URL
+	// @todo FIXME/CHECKME: voteImage=1 seems to be just cruft in the URL
 	$output = '<div class="game-unit-container">
-		<h2>' . wfMsg( 'game-unit-picturegame-title' ) . '</h2>
+		<h2>' . wfMessage( 'game-unit-picturegame-title' )->plain() . '</h2>
 		<div class="pg-unit-title">' . $title_text . '</div>
 		<div class="pg-unit-pictures">
 			<div onmouseout="this.style.backgroundColor = \'\'" onmouseover="this.style.backgroundColor = \'#4B9AF6\'">

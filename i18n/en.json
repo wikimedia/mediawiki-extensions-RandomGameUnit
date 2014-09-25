@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Aaron Wright <aaron.wright@gmail.com>",
+			"David Pean <david.pean@gmail.com>"
+		]
+	},
+	"game-unit-poll-title": "Take a Poll",
+	"game-unit-quiz-title": "Play the Quiz Game",
+	"game-unit-picturegame-title": "Play the Picture Game"
+}
