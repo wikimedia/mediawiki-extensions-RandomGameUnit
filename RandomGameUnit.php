@@ -30,7 +30,7 @@ $wgExtensionCredits['parserhook'][] = array(
 	'version' => '2.1',
 	'author' => array( 'Aaron Wright', 'David Pean', 'Jack Phoenix' ),
 	'url' => 'https://www.mediawiki.org/wiki/Extension:RandomGameUnit',
-	'description' => 'Displays a randomly chosen picture game, poll or a quiz',
+	'descriptionmsg' => 'game-unit-desc',
 );
 
 // Internationalization file

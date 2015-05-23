@@ -5,6 +5,7 @@
 			"David Pean <david.pean@gmail.com>"
 		]
 	},
+	"game-unit-desc": "Displays a randomly chosen picture game, poll or a quiz",
 	"game-unit-poll-title": "Take a Poll",
 	"game-unit-quiz-title": "Play the Quiz Game",
 	"game-unit-picturegame-title": "Play the Picture Game"
