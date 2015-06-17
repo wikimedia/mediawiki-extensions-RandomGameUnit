@@ -5,18 +5,14 @@
  *
  * @file
  * @ingroup Extensions
- * @version 2.1
+ * @version 2.2
  * @author Aaron Wright <aaron.wright@gmail.com>
  * @author David Pean <david.pean@gmail.com>
  * @author Jack Phoenix <jack@countervandalism.net>
- * @copyright Copyright © 2009-2014 Jack Phoenix <jack@countervandalism.net>
+ * @copyright Copyright © 2009-2015 Jack Phoenix <jack@countervandalism.net>
  * @link https://www.mediawiki.org/wiki/Extension:RandomGameUnit Documentation
  * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
  */
-
-if ( !defined( 'MEDIAWIKI' ) ) {
-	die( "This is not a valid entry point.\n" );
-}
 
 // Configuration variables
 $wgRandomGameDisplay['random_poll'] = true;
@@ -27,7 +23,7 @@ $wgRandomImageSize = 50;
 // Extension credits that will show up on Special:Version
 $wgExtensionCredits['parserhook'][] = array(
 	'name' => 'RandomGameUnit',
-	'version' => '2.1',
+	'version' => '2.2',
 	'author' => array( 'Aaron Wright', 'David Pean', 'Jack Phoenix' ),
 	'url' => 'https://www.mediawiki.org/wiki/Extension:RandomGameUnit',
 	'descriptionmsg' => 'game-unit-desc',
@@ -67,7 +63,7 @@ function wfGetRandomGameUnit( $input = '', $argsv = array() ) {
 		$random_games[] = 'picgame';
 	}
 
-	if ( !wfRunHooks( 'RandomGameUnit', array( &$random_games, &$custom_fallback ) ) ) {
+	if ( !Hooks::run( 'RandomGameUnit', array( &$random_games, &$custom_fallback ) ) ) {
 		wfDebug( __METHOD__ . ": RandomGameUnit hook messed up the page!\n" );
 	}
 
