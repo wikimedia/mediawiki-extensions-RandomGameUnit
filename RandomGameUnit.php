@@ -5,7 +5,7 @@
  *
  * @file
  * @ingroup Extensions
- * @version 2.2
+ * @version 2.3
  * @author Aaron Wright <aaron.wright@gmail.com>
  * @author David Pean <david.pean@gmail.com>
  * @author Jack Phoenix <jack@countervandalism.net>
@@ -23,7 +23,7 @@ $wgRandomImageSize = 50;
 // Extension credits that will show up on Special:Version
 $wgExtensionCredits['parserhook'][] = array(
 	'name' => 'RandomGameUnit',
-	'version' => '2.2',
+	'version' => '2.3',
 	'author' => array( 'Aaron Wright', 'David Pean', 'Jack Phoenix' ),
 	'url' => 'https://www.mediawiki.org/wiki/Extension:RandomGameUnit',
 	'descriptionmsg' => 'game-unit-desc',
@@ -295,7 +295,7 @@ function wfDisplayPictureGame( $picturegame ) {
 				<a href="' . htmlspecialchars( $pic_game_link->getFullURL( 'picGameAction=renderPermalink&id=' . $picturegame['id'] . '&voteID=' . $picturegame['id'] . '&voteImage=1&key=' . $key ) ) . '">' . $imgTwo . '</a>
 			</div>
 		</div>
-		<div class="cleared"></div>
+		<div class="visualClear"></div>
 	</div>';
 
 	return $output;
