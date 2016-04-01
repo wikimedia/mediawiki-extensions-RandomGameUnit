@@ -1,0 +1,35 @@
+{
+	"name": "RandomGameUnit",
+	"version": "2.4",
+	"author": [
+		"Aaron Wright",
+		"David Pean",
+		"Jack Phoenix"
+	],
+	"license-name": "GPL-2.0+",
+	"url": "https://www.mediawiki.org/wiki/Extension:RandomGameUnit",
+	"descriptionmsg": "game-unit-desc",
+	"type": "parserhook",
+	"config": {
+		"RandomGameDisplay": {
+			"random_poll": true,
+			"random_quiz": true,
+			"random_picturegame": true
+		},
+		"RandomImageSize": 50
+	},
+	"MessagesDirs": {
+		"RandomGameUnit": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"RandomGameUnit": "RandomGameUnit.class.php"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": [
+			"RandomGameUnit::registerTag"
+		]
+	},
+	"manifest_version": 1
+}
