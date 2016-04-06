@@ -189,7 +189,7 @@ class RandomGameUnit {
 		return $output;
 	}
 
-	public static function wfDisplayQuiz( $quiz ) {
+	public static function displayQuiz( $quiz ) {
 		global $wgRandomImageSize;
 
 		$quiz_title = SpecialPage::getTitleFor( 'QuizGameHome' );
