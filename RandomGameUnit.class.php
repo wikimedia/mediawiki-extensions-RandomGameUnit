@@ -76,10 +76,7 @@ class RandomGameUnit {
 					$params['ORDER BY'] = 'q_id DESC';
 					$res = $dbr->select(
 						'quizgame_questions',
-						array(
-							'q_id', 'q_text', 'q_picture',
-							'UNIX_TIMESTAMP(q_date) AS quiz_date'
-						),
+						array( 'q_id', 'q_text', 'q_picture' ),
 						/* WHERE */array(),
 						__METHOD__,
 						$params
@@ -88,8 +85,7 @@ class RandomGameUnit {
 						$quiz[] = array(
 							'id' => $row->q_id,
 							'text' => $row->q_text,
-							'image' => $row->q_picture,
-							'timestamp' => $row->quiz_date
+							'image' => $row->q_picture
 						);
 					}
 					$wgMemc->set( $key, $quiz, 60 * 10 );
@@ -102,7 +98,7 @@ class RandomGameUnit {
 			case 'picgame':
 				// Try cache
 				$pics = array();
-				$key = wfMemcKey( 'picgame', 'order', 'q_id' , 'count', $count );
+				$key = wfMemcKey( 'picgame', 'order', 'q_id', 'count', $count );
 				$data = $wgMemc->get( $key );
 				if ( $data ) {
 					wfDebugLog( 'RandomGameUnit', "Got picture game list ($count) ordered by id from cache" );
@@ -114,8 +110,8 @@ class RandomGameUnit {
 					$params['ORDER BY'] = 'id DESC';
 					$res = $dbr->select(
 						'picturegame_images',
-						array( 'id', 'title', 'img1', 'img2', 'UNIX_TIMESTAMP(pg_date) AS pic_game_date' ),
-						/* WHERE */array( 'flag <> 1' /* 1 = PICTUREGAME_FLAG_FLAGGED */ ),
+						array( 'id', 'title', 'img1', 'img2' ),
+						/* WHERE */array( 'flag <> 1' /* 1 = PictureGameHome::$FLAG_FLAGGED */ ),
 						__METHOD__,
 						$params
 					);
@@ -124,8 +120,7 @@ class RandomGameUnit {
 							'id' => $row->id,
 							'title' => $row->title,
 							'img1' => $row->img1,
-							'img2' => $row->img2,
-							'timestamp' => $row->pic_game_date
+							'img2' => $row->img2
 						);
 					}
 					$wgMemc->set( $key, $pics, 60 * 10 );
