@@ -1,11 +1,11 @@
 {
-  "@metadata": {
-    "authors": [
-      "Lewis Cawte <lewis@lewiscawte.me>"
-    ]
-  },
-  "game-unit-desc": "{{desc|name=RandomGameUnit|url=https://www.mediawiki.org/wiki/Extension:RandomGameUnit}}",
-  "game-unit-poll-title": "Take a Poll",
-  "game-unit-quiz-title": "Play the Quiz Game",
-  "game-unit-picturegame-title": "Play the Picture Game"
+	"@metadata": {
+		"authors": [
+			"Lewis Cawte <lewis@lewiscawte.me>"
+		]
+	},
+	"game-unit-desc": "{{desc|name=RandomGameUnit|url=https://www.mediawiki.org/wiki/Extension:RandomGameUnit}}",
+	"game-unit-poll-title": "Take a Poll",
+	"game-unit-quiz-title": "Play the Quiz Game",
+	"game-unit-picturegame-title": "Play the Picture Game"
 }
