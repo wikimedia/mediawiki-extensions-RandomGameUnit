@@ -25,7 +25,7 @@ class RandomGameUnit {
 		return true;
 	}
 
-	public static function getRandomGameUnit( $input = '', $argsv = array() ) {
+	public static function getRandomGameUnit( $input = '', $argsv = array(), $parser = null ) {
 		global $wgRandomGameDisplay, $wgMemc;
 
 		$random_games = array();
@@ -49,6 +49,15 @@ class RandomGameUnit {
 
 		if ( count( $random_games ) == 0 ) {
 			return '';
+		}
+
+		// Add CSS to the output if we can
+		// This is true when RandomGameUnit is invoked as a parser hook
+		// (<randomgameunit /> in wikitext) but false when this method is
+		// statically called by another extension (BlogPage, LinkFilter)
+		// or skin (Nimbus)
+		if ( $parser instanceof Parser ) {
+			$parser->getOutput()->addModuleStyles( 'ext.RandomGameUnit.css' );
 		}
 
 		$random_category = $random_games[array_rand( $random_games, 1 )];

@@ -1,6 +1,6 @@
 {
 	"name": "RandomGameUnit",
-	"version": "2.4",
+	"version": "2.5",
 	"author": [
 		"Aaron Wright",
 		"David Pean",
@@ -27,9 +27,17 @@
 		"RandomGameUnit": "RandomGameUnit.class.php"
 	},
 	"Hooks": {
-		"ParserFirstCallInit": [
-			"RandomGameUnit::registerTag"
-		]
+		"ParserFirstCallInit": "RandomGameUnit::registerTag"
+	},
+	"ResourceModules": {
+		"ext.RandomGameUnit.css": {
+			"styles": "RandomGameUnit.css",
+			"position": "top"
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "RandomGameUnit"
 	},
 	"manifest_version": 1
 }

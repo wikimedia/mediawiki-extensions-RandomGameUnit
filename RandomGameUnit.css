@@ -1,0 +1,49 @@
+/** Casual Game **/
+.poll-unit-title,
+.pg-unit-title {
+	font-size: 12px;
+	line-height: 13px;
+	font-weight: bold;
+	color: #777;
+	margin: 0 0 8px 0;
+}
+
+.poll-unit-choices a {
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 12px;
+	display: block;
+}
+
+.poll-unit-image {
+	margin: 0 0 8px 0;
+}
+
+.poll-unit-image img,
+.quiz-unit-image img {
+	padding: 3px;
+	background-color: #fff;
+	border: 1px solid #dcdcdc;
+}
+
+.poll-unit-choices input {
+	margin: 0 5px 0 0;
+}
+
+.quiz-unit-image {
+	margin: 8px 0 0 0;
+}
+
+.quiz-unit-title a {
+	font-size: 13px;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.pg-unit-pictures img {
+	float: left;
+	background-color: #fff;
+	border: 1px solid #dcdcdc;
+	padding: 3px;
+	margin: 0 3px 0 0;
+}
