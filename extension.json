@@ -1,6 +1,6 @@
 {
 	"name": "RandomGameUnit",
-	"version": "2.5",
+	"version": "2.6.0",
 	"author": [
 		"Aaron Wright",
 		"David Pean",
@@ -24,14 +24,14 @@
 		]
 	},
 	"AutoloadClasses": {
-		"RandomGameUnit": "RandomGameUnit.class.php"
+		"RandomGameUnit": "includes/RandomGameUnit.class.php"
 	},
 	"Hooks": {
 		"ParserFirstCallInit": "RandomGameUnit::registerTag"
 	},
 	"ResourceModules": {
 		"ext.RandomGameUnit.css": {
-			"styles": "RandomGameUnit.css",
+			"styles": "resources/css/RandomGameUnit.css",
 			"position": "top"
 		}
 	},
