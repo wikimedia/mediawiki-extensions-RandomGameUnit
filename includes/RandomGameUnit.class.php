@@ -7,8 +7,8 @@
  * @ingroup Extensions
  * @author Aaron Wright <aaron.wright@gmail.com>
  * @author David Pean <david.pean@gmail.com>
- * @author Jack Phoenix <jack@countervandalism.net>
- * @copyright Copyright © 2009-2016 Jack Phoenix <jack@countervandalism.net>
+ * @author Jack Phoenix
+ * @copyright Copyright © 2009-2017 Jack Phoenix
  * @link https://www.mediawiki.org/wiki/Extension:RandomGameUnit Documentation
  * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
  */
