@@ -73,7 +73,7 @@ class RandomGameUnit {
 			case 'quiz':
 				$quiz = array();
 				// Try cache
-				$key = wfMemcKey( 'quiz', 'order', 'q_id', 'count', $count );
+				$key = $wgMemc->makeKey( 'quiz', 'order', 'q_id', 'count', $count );
 				$data = $wgMemc->get( $key );
 				if ( $data ) {
 					wfDebugLog( 'RandomGameUnit', "Got quiz list ($count) from cache" );
@@ -107,7 +107,7 @@ class RandomGameUnit {
 			case 'picgame':
 				// Try cache
 				$pics = array();
-				$key = wfMemcKey( 'picgame', 'order', 'q_id', 'count', $count );
+				$key = $wgMemc->makeKey( 'picgame', 'order', 'q_id', 'count', $count );
 				$data = $wgMemc->get( $key );
 				if ( $data ) {
 					wfDebugLog( 'RandomGameUnit', "Got picture game list ($count) ordered by id from cache" );
