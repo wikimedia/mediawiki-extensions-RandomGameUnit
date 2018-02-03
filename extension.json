@@ -31,8 +31,7 @@
 	},
 	"ResourceModules": {
 		"ext.RandomGameUnit.css": {
-			"styles": "resources/css/RandomGameUnit.css",
-			"position": "top"
+			"styles": "resources/css/RandomGameUnit.css"
 		}
 	},
 	"ResourceFileModulePaths": {
