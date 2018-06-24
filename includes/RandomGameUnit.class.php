@@ -99,9 +99,11 @@ class RandomGameUnit {
 					}
 					$wgMemc->set( $key, $quiz, 60 * 10 );
 				}
-				$random_quiz = $quiz[array_rand( $quiz )];
-				if ( $random_quiz ) {
-					return self::displayQuiz( $random_quiz );
+				if ( is_array( $quiz ) && !empty( $quiz ) ) {
+					$random_quiz = $quiz[array_rand( $quiz )];
+					if ( $random_quiz ) {
+						return self::displayQuiz( $random_quiz );
+					}
 				}
 				break;
 			case 'picgame':
@@ -134,9 +136,11 @@ class RandomGameUnit {
 					}
 					$wgMemc->set( $key, $pics, 60 * 10 );
 				}
-				$random_picgame = $pics[array_rand( $pics )];
-				if ( $random_picgame ) {
-					return self::displayPictureGame( $random_picgame );
+				if ( is_array( $pics ) && !empty( $pics ) ) {
+					$random_picgame = $pics[array_rand( $pics )];
+					if ( $random_picgame ) {
+						return self::displayPictureGame( $random_picgame );
+					}
 				}
 
 				break;
