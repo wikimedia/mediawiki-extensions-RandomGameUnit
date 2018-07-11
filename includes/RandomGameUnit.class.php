@@ -150,6 +150,10 @@ class RandomGameUnit {
 				}
 				break;
 		}
+
+		// Still here? That means one thing and one thing only: none of the switch()
+		// cases below managed to return HTML. Return '' to prevent exposing strip markers.
+		return '';
 	}
 
 	public static function displayPoll( $poll ) {
