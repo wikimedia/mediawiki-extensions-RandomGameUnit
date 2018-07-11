@@ -8,7 +8,7 @@
  * @author Aaron Wright <aaron.wright@gmail.com>
  * @author David Pean <david.pean@gmail.com>
  * @author Jack Phoenix
- * @copyright Copyright © 2009-2017 Jack Phoenix
+ * @copyright Copyright © 2009-2018 Jack Phoenix
  * @link https://www.mediawiki.org/wiki/Extension:RandomGameUnit Documentation
  * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
  */
@@ -18,17 +18,15 @@ class RandomGameUnit {
 	 * Set up the <randomgameunit> parser hook
 	 *
 	 * @param Parser $parser Instance of Parser
-	 * @return bool
 	 */
 	public static function registerTag( &$parser ) {
-		$parser->setHook( 'randomgameunit', array( __CLASS__, 'getRandomGameUnit' ) );
-		return true;
+		$parser->setHook( 'randomgameunit', [ __CLASS__, 'getRandomGameUnit' ] );
 	}
 
-	public static function getRandomGameUnit( $input = '', $argsv = array(), $parser = null ) {
+	public static function getRandomGameUnit( $input = '', $argsv = [], $parser = null ) {
 		global $wgRandomGameDisplay, $wgMemc;
 
-		$random_games = array();
+		$random_games = [];
 		$custom_fallback = '';
 
 		if ( $wgRandomGameDisplay['random_poll'] ) {
@@ -43,7 +41,7 @@ class RandomGameUnit {
 			$random_games[] = 'picgame';
 		}
 
-		if ( !Hooks::run( 'RandomGameUnit', array( &$random_games, &$custom_fallback ) ) ) {
+		if ( !Hooks::run( 'RandomGameUnit', [ &$random_games, &$custom_fallback ] ) ) {
 			wfDebug( __METHOD__ . ": RandomGameUnit hook messed up the page!\n" );
 		}
 
@@ -71,7 +69,7 @@ class RandomGameUnit {
 				}
 				break;
 			case 'quiz':
-				$quiz = array();
+				$quiz = [];
 				// Try cache
 				$key = $wgMemc->makeKey( 'quiz', 'order', 'q_id', 'count', $count );
 				$data = $wgMemc->get( $key );
@@ -85,17 +83,17 @@ class RandomGameUnit {
 					$params['ORDER BY'] = 'q_id DESC';
 					$res = $dbr->select(
 						'quizgame_questions',
-						array( 'q_id', 'q_text', 'q_picture' ),
-						/* WHERE */array(),
+						[ 'q_id', 'q_text', 'q_picture' ],
+						/* WHERE */[],
 						__METHOD__,
 						$params
 					);
 					foreach ( $res as $row ) {
-						$quiz[] = array(
+						$quiz[] = [
 							'id' => $row->q_id,
 							'text' => $row->q_text,
 							'image' => $row->q_picture
-						);
+						];
 					}
 					$wgMemc->set( $key, $quiz, 60 * 10 );
 				}
@@ -108,7 +106,7 @@ class RandomGameUnit {
 				break;
 			case 'picgame':
 				// Try cache
-				$pics = array();
+				$pics = [];
 				$key = $wgMemc->makeKey( 'picgame', 'order', 'q_id', 'count', $count );
 				$data = $wgMemc->get( $key );
 				if ( $data ) {
@@ -121,18 +119,18 @@ class RandomGameUnit {
 					$params['ORDER BY'] = 'id DESC';
 					$res = $dbr->select(
 						'picturegame_images',
-						array( 'id', 'title', 'img1', 'img2' ),
-						/* WHERE */array( 'flag <> 1' /* 1 = PictureGameHome::$FLAG_FLAGGED */ ),
+						[ 'id', 'title', 'img1', 'img2' ],
+						/* WHERE */[ 'flag <> 1' /* 1 = PictureGameHome::$FLAG_FLAGGED */ ],
 						__METHOD__,
 						$params
 					);
 					foreach ( $res as $row ) {
-						$pics[] = array(
+						$pics[] = [
 							'id' => $row->id,
 							'title' => $row->title,
 							'img1' => $row->img1,
 							'img2' => $row->img2
-						);
+						];
 					}
 					$wgMemc->set( $key, $pics, 60 * 10 );
 				}
@@ -275,16 +273,15 @@ class RandomGameUnit {
 		#global $wgUser;
 		#$key = md5( $picturegame['id'] . md5( $wgUser->getName() ) ); // the 2nd param should be PictureGameHome::$SALT but that is a private member variable
 
-		// @todo FIXME/CHECKME: voteImage=1 seems to be just cruft in the URL
 		$output = '<div class="game-unit-container">
 		<h2>' . wfMessage( 'game-unit-picturegame-title' )->plain() . '</h2>
 		<div class="pg-unit-title">' . $title_text . '</div>
 		<div class="pg-unit-pictures">
 			<div onmouseout="this.style.backgroundColor = \'\'" onmouseover="this.style.backgroundColor = \'#4B9AF6\'">
-				<a href="' . htmlspecialchars( $pic_game_link->getFullURL( 'picGameAction=renderPermalink&id=' . $picturegame['id'] . '&voteID=' . $picturegame['id'] . '&voteImage=1&key=' . $key ) ) . '">' . $imgOne . '</a>
+				<a href="' . htmlspecialchars( $pic_game_link->getFullURL( 'picGameAction=renderPermalink&id=' . $picturegame['id'] . '&voteID=' . $picturegame['id'] . '&key=' . $key ) ) . '">' . $imgOne . '</a>
 			</div>
 			<div onmouseout="this.style.backgroundColor = \'\'" onmouseover="this.style.backgroundColor = \'#FF0000\'">
-				<a href="' . htmlspecialchars( $pic_game_link->getFullURL( 'picGameAction=renderPermalink&id=' . $picturegame['id'] . '&voteID=' . $picturegame['id'] . '&voteImage=1&key=' . $key ) ) . '">' . $imgTwo . '</a>
+				<a href="' . htmlspecialchars( $pic_game_link->getFullURL( 'picGameAction=renderPermalink&id=' . $picturegame['id'] . '&voteID=' . $picturegame['id'] . '&key=' . $key ) ) . '">' . $imgTwo . '</a>
 			</div>
 		</div>
 		<div class="visualClear"></div>
