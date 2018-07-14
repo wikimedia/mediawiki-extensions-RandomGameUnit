@@ -78,7 +78,7 @@ class RandomGameUnit {
 					$quiz = $data;
 				} else {
 					wfDebugLog( 'RandomGameUnit', "Got quiz list ($count) ordered by q_id from DB" );
-					$dbr = wfGetDB( DB_SLAVE );
+					$dbr = wfGetDB( DB_REPLICA );
 					$params['LIMIT'] = $count;
 					$params['ORDER BY'] = 'q_id DESC';
 					$res = $dbr->select(
@@ -114,7 +114,7 @@ class RandomGameUnit {
 					$pics = $data;
 				} else {
 					wfDebugLog( 'RandomGameUnit', "Got picture game list ($count) ordered by id from DB" );
-					$dbr = wfGetDB( DB_SLAVE );
+					$dbr = wfGetDB( DB_REPLICA );
 					$params['LIMIT'] = $count;
 					$params['ORDER BY'] = 'id DESC';
 					$res = $dbr->select(
