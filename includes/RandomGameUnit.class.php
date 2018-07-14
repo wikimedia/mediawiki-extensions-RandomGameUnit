@@ -270,8 +270,8 @@ class RandomGameUnit {
 
 		# check PictureGame/PictureGameHome.body.php to see what value of $key should be
 		$key = '';
-		#global $wgUser;
-		#$key = md5( $picturegame['id'] . md5( $wgUser->getName() ) ); // the 2nd param should be PictureGameHome::$SALT but that is a private member variable
+		# global $wgUser;
+		# $key = md5( $picturegame['id'] . md5( $wgUser->getName() ) ); // the 2nd param should be PictureGameHome::$SALT but that is a private member variable
 
 		$output = '<div class="game-unit-container">
 		<h2>' . wfMessage( 'game-unit-picturegame-title' )->plain() . '</h2>
