@@ -10,7 +10,7 @@
  * @author Jack Phoenix
  * @copyright Copyright © 2009-2018 Jack Phoenix
  * @link https://www.mediawiki.org/wiki/Extension:RandomGameUnit Documentation
- * @license http://www.gnu.org/copyleft/gpl.html GNU General Public License 2.0 or later
+ * @license GPL-2.0-or-later
  */
 
 class RandomGameUnit {
