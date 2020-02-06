@@ -24,7 +24,7 @@
 		]
 	},
 	"AutoloadClasses": {
-		"RandomGameUnit": "includes/RandomGameUnit.class.php"
+		"RandomGameUnit": "includes/RandomGameUnit.php"
 	},
 	"Hooks": {
 		"ParserFirstCallInit": "RandomGameUnit::registerTag"
