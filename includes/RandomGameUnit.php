@@ -13,6 +13,8 @@
  * @license GPL-2.0-or-later
  */
 
+use MediaWiki\MediaWikiServices;
+
 class RandomGameUnit {
 	/**
 	 * Set up the <randomgameunit> parser hook
@@ -172,7 +174,13 @@ class RandomGameUnit {
 
 		if ( $poll['image'] ) {
 			$poll_image_width = $wgRandomImageSize;
-			$poll_image = wfFindFile( $poll['image'] );
+			if ( method_exists( MediaWikiServices::class, 'getRepoGroup' ) ) {
+				// MediaWiki 1.34+
+				$poll_image = MediaWikiServices::getInstance()->getRepoGroup()
+					->findFile( $poll['image'] );
+			} else {
+				$poll_image = wfFindFile( $poll['image'] );
+			}
 			$poll_image_url = $width = '';
 			if ( is_object( $poll_image ) ) {
 				$poll_image_url = $poll_image->createThumb( $poll_image_width );
@@ -209,7 +217,12 @@ class RandomGameUnit {
 
 		if ( $quiz['image'] ) {
 			$quiz_image_width = $wgRandomImageSize;
-			$quiz_image = wfFindFile( $quiz['image'] );
+			if ( method_exists( MediaWikiServices::class, 'getRepoGroup' ) ) {
+				// MediaWiki 1.34+
+				$quiz_image = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $quiz['image'] );
+			} else {
+				$quiz_image = wfFindFile( $quiz['image'] );
+			}
 			$quiz_image_url = $width = '';
 			if ( is_object( $quiz_image ) ) {
 				$quiz_image_url = $quiz_image->createThumb( $quiz_image_width );
@@ -242,7 +255,13 @@ class RandomGameUnit {
 			$title_text = substr( $picturegame['title'], 0, 48 ) . wfMessage( 'ellipsis' )->escaped();
 		}
 
-		$img_one = wfFindFile( $picturegame['img1'] );
+		if ( method_exists( MediaWikiServices::class, 'getRepoGroup' ) ) {
+			// MediaWiki 1.34+
+			$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
+		} else {
+			$repoGroup = RepoGroup::singleton();
+		}
+		$img_one = $repoGroup->findFile( $picturegame['img1'] );
 		$thumb_one_url = $imgOneWidth = '';
 		if ( is_object( $img_one ) ) {
 			$thumb_one_url = $img_one->createThumb( $img_width );
@@ -254,7 +273,7 @@ class RandomGameUnit {
 		}
 		$imgOne = '<img width="' . $imgOneWidth . '" alt="" src="' . $thumb_one_url . '?' . time() . '"/>';
 
-		$img_two = wfFindFile( $picturegame['img2'] );
+		$img_two = $repoGroup->findFile( $picturegame['img2'] );
 		$thumb_two_url = $imgTwoWidth = '';
 		if ( is_object( $img_two ) ) {
 			$thumb_two_url = $img_two->createThumb( $img_width );
