@@ -26,7 +26,7 @@ class RandomGameUnit {
 	}
 
 	public static function getRandomGameUnit( $input = '', $argsv = [], $parser = null ) {
-		global $wgRandomGameDisplay, $wgMemc;
+		global $wgRandomGameDisplay;
 
 		$random_games = [];
 		$custom_fallback = '';
@@ -60,6 +60,7 @@ class RandomGameUnit {
 			$parser->getOutput()->addModuleStyles( 'ext.RandomGameUnit.css' );
 		}
 
+		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
 		$random_category = $random_games[array_rand( $random_games, 1 )];
 		$count = 10;
 		switch ( $random_category ) {
@@ -73,8 +74,8 @@ class RandomGameUnit {
 			case 'quiz':
 				$quiz = [];
 				// Try cache
-				$key = $wgMemc->makeKey( 'quiz', 'order', 'q_id', 'count', $count );
-				$data = $wgMemc->get( $key );
+				$key = $cache->makeKey( 'quiz', 'order', 'q_id', 'count', $count );
+				$data = $cache->get( $key );
 				if ( $data ) {
 					wfDebugLog( 'RandomGameUnit', "Got quiz list ($count) from cache" );
 					$quiz = $data;
@@ -97,7 +98,7 @@ class RandomGameUnit {
 							'image' => $row->q_picture
 						];
 					}
-					$wgMemc->set( $key, $quiz, 60 * 10 );
+					$cache->set( $key, $quiz, 60 * 10 );
 				}
 				if ( is_array( $quiz ) && !empty( $quiz ) ) {
 					$random_quiz = $quiz[array_rand( $quiz )];
@@ -109,8 +110,8 @@ class RandomGameUnit {
 			case 'picgame':
 				// Try cache
 				$pics = [];
-				$key = $wgMemc->makeKey( 'picgame', 'order', 'q_id', 'count', $count );
-				$data = $wgMemc->get( $key );
+				$key = $cache->makeKey( 'picgame', 'order', 'q_id', 'count', $count );
+				$data = $cache->get( $key );
 				if ( $data ) {
 					wfDebugLog( 'RandomGameUnit', "Got picture game list ($count) ordered by id from cache" );
 					$pics = $data;
@@ -134,7 +135,7 @@ class RandomGameUnit {
 							'img2' => $row->img2
 						];
 					}
-					$wgMemc->set( $key, $pics, 60 * 10 );
+					$cache->set( $key, $pics, 60 * 10 );
 				}
 				if ( is_array( $pics ) && !empty( $pics ) ) {
 					$random_picgame = $pics[array_rand( $pics )];
@@ -174,13 +175,7 @@ class RandomGameUnit {
 
 		if ( $poll['image'] ) {
 			$poll_image_width = $wgRandomImageSize;
-			if ( method_exists( MediaWikiServices::class, 'getRepoGroup' ) ) {
-				// MediaWiki 1.34+
-				$poll_image = MediaWikiServices::getInstance()->getRepoGroup()
-					->findFile( $poll['image'] );
-			} else {
-				$poll_image = wfFindFile( $poll['image'] );
-			}
+			$poll_image = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $poll['image'] );
 			$poll_image_url = $width = '';
 			if ( is_object( $poll_image ) ) {
 				$poll_image_url = $poll_image->createThumb( $poll_image_width );
@@ -217,12 +212,7 @@ class RandomGameUnit {
 
 		if ( $quiz['image'] ) {
 			$quiz_image_width = $wgRandomImageSize;
-			if ( method_exists( MediaWikiServices::class, 'getRepoGroup' ) ) {
-				// MediaWiki 1.34+
-				$quiz_image = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $quiz['image'] );
-			} else {
-				$quiz_image = wfFindFile( $quiz['image'] );
-			}
+			$quiz_image = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $quiz['image'] );
 			$quiz_image_url = $width = '';
 			if ( is_object( $quiz_image ) ) {
 				$quiz_image_url = $quiz_image->createThumb( $quiz_image_width );
@@ -255,12 +245,7 @@ class RandomGameUnit {
 			$title_text = substr( $picturegame['title'], 0, 48 ) . wfMessage( 'ellipsis' )->escaped();
 		}
 
-		if ( method_exists( MediaWikiServices::class, 'getRepoGroup' ) ) {
-			// MediaWiki 1.34+
-			$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
-		} else {
-			$repoGroup = RepoGroup::singleton();
-		}
+		$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
 		$img_one = $repoGroup->findFile( $picturegame['img1'] );
 		$thumb_one_url = $imgOneWidth = '';
 		if ( is_object( $img_one ) ) {
