@@ -19,7 +19,7 @@ class RandomGameUnit {
 	/**
 	 * Set up the <randomgameunit> parser hook
 	 *
-	 * @param Parser $parser Instance of Parser
+	 * @param Parser &$parser Instance of Parser
 	 */
 	public static function registerTag( &$parser ) {
 		$parser->setHook( 'randomgameunit', [ __CLASS__, 'getRandomGameUnit' ] );
