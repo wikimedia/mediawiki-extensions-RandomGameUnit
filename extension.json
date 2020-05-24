@@ -1,6 +1,6 @@
 {
 	"name": "RandomGameUnit",
-	"version": "2.6.1",
+	"version": "2.7.0",
 	"author": [
 		"Aaron Wright",
 		"David Pean",
@@ -10,6 +10,9 @@
 	"url": "https://www.mediawiki.org/wiki/Extension:RandomGameUnit",
 	"descriptionmsg": "game-unit-desc",
 	"type": "parserhook",
+	"requires": {
+		"MediaWiki": ">= 1.34.0"
+	},
 	"config": {
 		"RandomGameDisplay": {
 			"random_poll": true,
