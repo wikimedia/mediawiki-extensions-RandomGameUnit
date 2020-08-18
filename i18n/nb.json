@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jon Harald Søby"
+		]
+	},
+	"game-unit-desc": "Viser tilfeldig valgt bildespill, avstemning eller quiz.",
+	"game-unit-poll-title": "Ta en avstemning",
+	"game-unit-quiz-title": "Spill quizspillet",
+	"game-unit-picturegame-title": "Spill bildespillet"
+}
