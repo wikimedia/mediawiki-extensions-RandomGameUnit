@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nguyễn Mạnh An"
+		]
+	},
+	"game-unit-desc": "Hiển thị một trò chơi hình ảnh được chọn ngẫu nhiên, cuộc thăm dò ý kiến ​​hoặc một câu đố",
+	"game-unit-poll-title": "Tham gia cuộc thăm dò ý kiến",
+	"game-unit-quiz-title": "Chơi trò chơi đố vui",
+	"game-unit-picturegame-title": "Chơi trò chơi hình ảnh"
+}
