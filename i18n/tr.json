@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Selcuksntrk"
+		]
+	},
+	"game-unit-desc": "Rastgele bir resim oyunu, anket veya sınav gösterir.",
+	"game-unit-poll-title": "Anket Yap",
+	"game-unit-quiz-title": "Sınav Oyununu Oyna",
+	"game-unit-picturegame-title": "Resim Oyununu Oyna"
+}
