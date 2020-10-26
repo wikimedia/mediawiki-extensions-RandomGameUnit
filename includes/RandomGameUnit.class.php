@@ -8,7 +8,7 @@
  * @author Aaron Wright <aaron.wright@gmail.com>
  * @author David Pean <david.pean@gmail.com>
  * @author Jack Phoenix
- * @copyright Copyright © 2009-2018 Jack Phoenix
+ * @copyright Copyright © 2009-2020 Jack Phoenix
  * @link https://www.mediawiki.org/wiki/Extension:RandomGameUnit Documentation
  * @license GPL-2.0-or-later
  */
@@ -165,10 +165,10 @@ class RandomGameUnit {
 			$ns = 300;
 		}
 
-		$poll_link = Title::makeTitle( $ns, $poll['title'] );
+		$poll_link = Title::makeTitleSafe( $ns, $poll['title'] );
 		$output = '<div class="game-unit-container">
-			<h2>' . wfMessage( 'game-unit-poll-title' )->plain() . '</h2>
-			<div class="poll-unit-title">' . $poll_link->getText() . '</div>';
+			<h2>' . wfMessage( 'game-unit-poll-title' )->escaped() . '</h2>
+			<div class="poll-unit-title">' . htmlspecialchars( $poll_link->getText(), ENT_QUOTES ) . '</div>';
 
 		if ( $poll['image'] ) {
 			$poll_image_width = $wgRandomImageSize;
@@ -190,7 +190,7 @@ class RandomGameUnit {
 		foreach ( $poll['choices'] as $choice ) {
 			$output .= '<a href="' . htmlspecialchars( $poll_link->getFullURL() ) . '" rel="nofollow">
 				<input id="poll_choice" type="radio" value="10" name="poll_choice" onclick="location.href=\'' .
-				htmlspecialchars( $poll_link->getFullURL() ) . '\'" /> ' . $choice['choice'] .
+				htmlspecialchars( $poll_link->getFullURL() ) . '\'" /> ' . htmlspecialchars( $choice['choice'], ENT_QUOTES ) .
 			'</a>';
 		}
 		$output .= '</div>
@@ -204,8 +204,8 @@ class RandomGameUnit {
 
 		$quiz_title = SpecialPage::getTitleFor( 'QuizGameHome' );
 		$output = '<div class="game-unit-container">
-			<h2>' . wfMessage( 'game-unit-quiz-title' )->plain() . '</h2>
-			<div class="quiz-unit-title"><a href="' . htmlspecialchars( $quiz_title->getFullURL( "questionGameAction=renderPermalink&permalinkID={$quiz['id']}" ) ) . '" rel="nofollow">' . $quiz['text'] . '</a></div>';
+			<h2>' . wfMessage( 'game-unit-quiz-title' )->escaped() . '</h2>
+			<div class="quiz-unit-title"><a href="' . htmlspecialchars( $quiz_title->getFullURL( "questionGameAction=renderPermalink&permalinkID={$quiz['id']}" ) ) . '" rel="nofollow">' . htmlspecialchars( $quiz['text'], ENT_QUOTES ) . '</a></div>';
 
 		if ( $quiz['image'] ) {
 			$quiz_image_width = $wgRandomImageSize;
@@ -274,8 +274,8 @@ class RandomGameUnit {
 		# $key = md5( $picturegame['id'] . md5( $wgUser->getName() ) ); // the 2nd param should be PictureGameHome::$SALT but that is a private member variable
 
 		$output = '<div class="game-unit-container">
-		<h2>' . wfMessage( 'game-unit-picturegame-title' )->plain() . '</h2>
-		<div class="pg-unit-title">' . $title_text . '</div>
+		<h2>' . wfMessage( 'game-unit-picturegame-title' )->escaped() . '</h2>
+		<div class="pg-unit-title">' . htmlspecialchars( $title_text, ENT_QUOTES ) . '</div>
 		<div class="pg-unit-pictures">
 			<div onmouseout="this.style.backgroundColor = \'\'" onmouseover="this.style.backgroundColor = \'#4B9AF6\'">
 				<a href="' . htmlspecialchars( $pic_game_link->getFullURL( 'picGameAction=renderPermalink&id=' . $picturegame['id'] . '&voteID=' . $picturegame['id'] . '&key=' . $key ) ) . '">' . $imgOne . '</a>
