@@ -82,6 +82,7 @@ class RandomGameUnit {
 				} else {
 					wfDebugLog( 'RandomGameUnit', "Got quiz list ($count) ordered by q_id from DB" );
 					$dbr = wfGetDB( DB_REPLICA );
+					$params = [];
 					$params['LIMIT'] = $count;
 					$params['ORDER BY'] = 'q_id DESC';
 					$res = $dbr->select(
@@ -118,6 +119,7 @@ class RandomGameUnit {
 				} else {
 					wfDebugLog( 'RandomGameUnit', "Got picture game list ($count) ordered by id from DB" );
 					$dbr = wfGetDB( DB_REPLICA );
+					$params = [];
 					$params['LIMIT'] = $count;
 					$params['ORDER BY'] = 'id DESC';
 					$res = $dbr->select(
@@ -146,6 +148,7 @@ class RandomGameUnit {
 
 				break;
 			case 'custom':
+				// @phan-suppress-next-line PhanImpossibleCondition Hooks can set $custom_fallback
 				if ( $custom_fallback ) {
 					return call_user_func( $custom_fallback, $count );
 				}
@@ -163,7 +166,7 @@ class RandomGameUnit {
 		// I don't see how it'd be possible that NS_POLL is undefined at this point
 		// but it's better to be safe than sorry, so I added this here.
 		if ( defined( 'NS_POLL' ) ) {
-			$ns = NS_POLL;
+			$ns = (int)NS_POLL;
 		} else {
 			$ns = 300;
 		}
@@ -242,7 +245,7 @@ class RandomGameUnit {
 		if ( $picturegame['title'] == substr( $picturegame['title'], 0, 48 ) ) {
 			$title_text = $picturegame['title'];
 		} else {
-			$title_text = substr( $picturegame['title'], 0, 48 ) . wfMessage( 'ellipsis' )->escaped();
+			$title_text = substr( $picturegame['title'], 0, 48 ) . wfMessage( 'ellipsis' )->text();
 		}
 
 		$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
