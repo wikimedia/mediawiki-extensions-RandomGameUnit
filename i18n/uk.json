@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"DDPAT"
+		]
+	},
+	"game-unit-desc": "Показує випадково вибрану картинкову гру, опитування чи вікторину",
+	"game-unit-poll-title": "Пройдіть опитування",
+	"game-unit-quiz-title": "Грати у вікторині",
+	"game-unit-picturegame-title": "Грати у картинковій грі"
+}
