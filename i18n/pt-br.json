@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eduardo Addad de Oliveira",
+			"Eduardoaddad"
+		]
+	},
+	"game-unit-desc": "Mostra um jogo de imagem, enquete ou questionário escolhido aleatoriamente",
+	"game-unit-poll-title": "Faça uma votação",
+	"game-unit-quiz-title": "Jogue o jogo de questionário",
+	"game-unit-picturegame-title": "Jogue o jogo de imagens"
+}

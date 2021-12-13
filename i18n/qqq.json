@@ -5,7 +5,7 @@
 		]
 	},
 	"game-unit-desc": "{{desc|name=RandomGameUnit|url=https://www.mediawiki.org/wiki/Extension:RandomGameUnit}}",
-	"game-unit-poll-title": "Take a Poll",
-	"game-unit-quiz-title": "Play the Quiz Game",
-	"game-unit-picturegame-title": "Play the Picture Game"
+	"game-unit-poll-title": "Header text in the output of the <code>&lt;randomgameunit /&gt;</code> tag when the extension is rendering a randomly chosen [[mw:Extension:PollNY|poll]]",
+	"game-unit-quiz-title": "Header text in the output of the <code>&lt;randomgameunit /&gt;</code> tag when the extension is rendering a randomly chosen [[mw:Extension:QuizGame|quiz]]",
+	"game-unit-picturegame-title": "Header text in the output of the <code>&lt;randomgameunit /&gt;</code> tag when the extension is rendering a randomly chosen [[mw:Extension:PictureGame|picture game]]"
 }

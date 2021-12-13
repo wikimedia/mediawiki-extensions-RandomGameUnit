@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sabelöga"
+		]
+	},
+	"game-unit-desc": "Visar ett slumpmässigt utvald bildspel, opinionsundersökning eller frågesport",
+	"game-unit-quiz-title": "Spela frågesportspelet",
+	"game-unit-picturegame-title": "Spela bildspelet"
+}
