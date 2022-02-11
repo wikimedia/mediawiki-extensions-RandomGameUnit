@@ -57,7 +57,7 @@ class RandomGameUnit {
 		// statically called by another extension (BlogPage, LinkFilter)
 		// or skin (Nimbus)
 		if ( $parser instanceof Parser ) {
-			$parser->getOutput()->addModuleStyles( 'ext.RandomGameUnit.css' );
+			$parser->getOutput()->addModuleStyles( [ 'ext.RandomGameUnit.css' ] );
 		}
 
 		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
