@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"DDPAT"
+			"DDPAT",
+			"Ice bulldog"
 		]
 	},
 	"game-unit-desc": "Показує випадково вибрану картинкову гру, опитування чи вікторину",
