@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"DiegoAmbrocio"
+		]
+	},
+	"game-unit-desc": "Muestra un juego de imágenes, una encuesta o un cuestionario elegidos al azar",
+	"game-unit-poll-title": "Haz una encuesta",
+	"game-unit-quiz-title": "Jugar al juego de preguntas",
+	"game-unit-picturegame-title": "Juega al juego de las imágenes"
+}
