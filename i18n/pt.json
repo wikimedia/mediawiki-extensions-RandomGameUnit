@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hamilton Abreu"
+		]
+	},
+	"game-unit-desc": "Apresenta um jogo de imagens, uma sondagem ou um concurso, escolhido à sorte",
+	"game-unit-poll-title": "Faça uma sondagem",
+	"game-unit-quiz-title": "Jogue o concurso de perguntas e respostas",
+	"game-unit-picturegame-title": "Jogue ao jogo das imagens"
+}
