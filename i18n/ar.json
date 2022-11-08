@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Meno25"
+		]
+	},
+	"game-unit-desc": "تعرض لعبة صور أو استطلاع رأي أو اختبار تم اختياره عشوائيًا",
+	"game-unit-poll-title": "خذ استطلاع",
+	"game-unit-quiz-title": "العب لعبة المسابقة",
+	"game-unit-picturegame-title": "العب لعبة الصور"
+}
