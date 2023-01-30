@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Gebu"
+			"Gebu",
+			"Justman10000"
 		]
 	},
+	"game-unit-desc": "Zeigt ein zufällig ausgewähltes Bilderspiel, eine Umfrage oder ein Quiz an",
+	"game-unit-poll-title": "Mach eine Umfrage",
+	"game-unit-quiz-title": "Spiele das Quizspiel",
 	"game-unit-picturegame-title": "Das Bildspiel spielen"
 }
