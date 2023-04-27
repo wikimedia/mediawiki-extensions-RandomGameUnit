@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nokeoo"
+		]
+	},
+	"game-unit-desc": "Rodo atsitiktinai pasirinktą paveikslėlių žaidimą, apklausą ar viktoriną",
+	"game-unit-poll-title": "Atsakyti į apklausą",
+	"game-unit-quiz-title": "Žaisti viktorinos žaidimą",
+	"game-unit-picturegame-title": "Žaisti paveikslėlių žaidimą"
+}
