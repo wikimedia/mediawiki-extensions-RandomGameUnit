@@ -43,7 +43,7 @@ class RandomGameUnit {
 			$random_games[] = 'picgame';
 		}
 
-		if ( !Hooks::run( 'RandomGameUnit', [ &$random_games, &$custom_fallback ] ) ) {
+		if ( !MediaWikiServices::getInstance()->getHookContainer()->run( 'RandomGameUnit', [ &$random_games, &$custom_fallback ] ) ) {
 			wfDebug( __METHOD__ . ": RandomGameUnit hook messed up the page!\n" );
 		}
 
