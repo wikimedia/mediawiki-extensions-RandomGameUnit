@@ -81,7 +81,7 @@ class RandomGameUnit {
 					$quiz = $data;
 				} else {
 					wfDebugLog( 'RandomGameUnit', "Got quiz list ($count) ordered by q_id from DB" );
-					$dbr = wfGetDB( DB_REPLICA );
+					$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
 					$params = [];
 					$params['LIMIT'] = $count;
 					$params['ORDER BY'] = 'q_id DESC';
@@ -118,7 +118,7 @@ class RandomGameUnit {
 					$pics = $data;
 				} else {
 					wfDebugLog( 'RandomGameUnit', "Got picture game list ($count) ordered by id from DB" );
-					$dbr = wfGetDB( DB_REPLICA );
+					$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
 					$params = [];
 					$params['LIMIT'] = $count;
 					$params['ORDER BY'] = 'id DESC';
