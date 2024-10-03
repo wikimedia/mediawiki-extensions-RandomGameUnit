@@ -101,7 +101,7 @@ class RandomGameUnit {
 					}
 					$cache->set( $key, $quiz, 60 * 10 );
 				}
-				if ( is_array( $quiz ) && !empty( $quiz ) ) {
+				if ( is_array( $quiz ) && $quiz ) {
 					$random_quiz = $quiz[array_rand( $quiz )];
 					if ( $random_quiz ) {
 						return self::displayQuiz( $random_quiz );
@@ -139,7 +139,7 @@ class RandomGameUnit {
 					}
 					$cache->set( $key, $pics, 60 * 10 );
 				}
-				if ( is_array( $pics ) && !empty( $pics ) ) {
+				if ( is_array( $pics ) && $pics ) {
 					$random_picgame = $pics[array_rand( $pics )];
 					if ( $random_picgame ) {
 						return self::displayPictureGame( $random_picgame );
