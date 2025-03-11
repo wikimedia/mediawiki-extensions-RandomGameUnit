@@ -5,6 +5,7 @@
 		]
 	},
 	"game-unit-desc": "Visar ett slumpmässigt utvald bildspel, opinionsundersökning eller frågesport",
-	"game-unit-quiz-title": "Spela frågesportspelet",
+	"game-unit-poll-title": "Delta i en omröstning",
+	"game-unit-quiz-title": "Evighetsquiz",
 	"game-unit-picturegame-title": "Spela bildspelet"
 }
