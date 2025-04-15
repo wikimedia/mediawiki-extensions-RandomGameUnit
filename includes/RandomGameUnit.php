@@ -8,18 +8,21 @@
  * @author Aaron Wright <aaron.wright@gmail.com>
  * @author David Pean <david.pean@gmail.com>
  * @author Jack Phoenix
- * @copyright Copyright © 2009-2020 Jack Phoenix
+ * @copyright Copyright © 2009-2025 Jack Phoenix
  * @link https://www.mediawiki.org/wiki/Extension:RandomGameUnit Documentation
  * @license GPL-2.0-or-later
  */
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Parser\Parser;
+use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\Title\Title;
 
 class RandomGameUnit {
 	/**
 	 * Set up the <randomgameunit> parser hook
 	 *
-	 * @param Parser &$parser Instance of Parser
+	 * @param MediaWiki\Parser\Parser &$parser Instance of Parser
 	 */
 	public static function registerTag( &$parser ) {
 		$parser->setHook( 'randomgameunit', [ __CLASS__, 'getRandomGameUnit' ] );
@@ -30,6 +33,8 @@ class RandomGameUnit {
 
 		$random_games = [];
 		$custom_fallback = '';
+
+		$services = MediaWikiServices::getInstance();
 
 		if ( $wgRandomGameDisplay['random_poll'] ) {
 			$random_games[] = 'poll';
@@ -43,7 +48,7 @@ class RandomGameUnit {
 			$random_games[] = 'picgame';
 		}
 
-		if ( !MediaWikiServices::getInstance()->getHookContainer()->run( 'RandomGameUnit', [ &$random_games, &$custom_fallback ] ) ) {
+		if ( !$services->getHookContainer()->run( 'RandomGameUnit', [ &$random_games, &$custom_fallback ] ) ) {
 			wfDebug( __METHOD__ . ": RandomGameUnit hook messed up the page!\n" );
 		}
 
@@ -60,7 +65,7 @@ class RandomGameUnit {
 			$parser->getOutput()->addModuleStyles( [ 'ext.RandomGameUnit.css' ] );
 		}
 
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$cache = $services->getMainWANObjectCache();
 		$random_category = $random_games[array_rand( $random_games, 1 )];
 		$count = 10;
 		switch ( $random_category ) {
@@ -81,7 +86,7 @@ class RandomGameUnit {
 					$quiz = $data;
 				} else {
 					wfDebugLog( 'RandomGameUnit', "Got quiz list ($count) ordered by q_id from DB" );
-					$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+					$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 					$params = [];
 					$params['LIMIT'] = $count;
 					$params['ORDER BY'] = 'q_id DESC';
@@ -118,7 +123,7 @@ class RandomGameUnit {
 					$pics = $data;
 				} else {
 					wfDebugLog( 'RandomGameUnit', "Got picture game list ($count) ordered by id from DB" );
-					$dbr = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
+					$dbr = $services->getDBLoadBalancer()->getConnection( DB_REPLICA );
 					$params = [];
 					$params['LIMIT'] = $count;
 					$params['ORDER BY'] = 'id DESC';
