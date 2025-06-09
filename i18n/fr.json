@@ -2,11 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Gomoko",
+			"McDutchie",
 			"Verdy p"
 		]
 	},
 	"game-unit-desc": "Affiche un jeu d’image, un sondage ou un quiz choisi aléatoirement",
 	"game-unit-poll-title": "Répondre à un sondage",
-	"game-unit-quiz-title": "Quiz sans fin",
+	"game-unit-quiz-title": "Jouer au jeu du quiz",
 	"game-unit-picturegame-title": "Jouer au jeu des images"
 }

@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"McDutchie",
 			"列维劳德"
 		]
 	},
 	"game-unit-desc": "随机显示一个已选的照片游戏、投票或小测验",
 	"game-unit-poll-title": "参与调查",
-	"game-unit-quiz-title": "无尽问答",
+	"game-unit-quiz-title": "玩小测验游戏",
 	"game-unit-picturegame-title": "游玩图片游戏"
 }
