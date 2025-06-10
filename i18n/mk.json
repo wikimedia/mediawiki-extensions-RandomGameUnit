@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bjankuloski06"
+			"Bjankuloski06",
+			"McDutchie"
 		]
 	},
 	"game-unit-desc": "Прикажува случајно избрана игра со слики, анкета или квиз",
 	"game-unit-poll-title": "Пополнете анкета",
-	"game-unit-quiz-title": "Бекраен квиз",
+	"game-unit-quiz-title": "Играјте квиз",
 	"game-unit-picturegame-title": "Играјте сликовна игра"
 }
