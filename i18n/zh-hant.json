@@ -2,11 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"Kly",
-			"捍粵者"
+			"捍粵者",
+			"McDutchie"
 		]
 	},
 	"game-unit-desc": "顯示隨機選擇的圖片遊戲、投票或問答",
 	"game-unit-poll-title": "T投票",
-	"game-unit-quiz-title": "永無止境的問答",
+	"game-unit-quiz-title": "遊玩問答遊戲",
 	"game-unit-picturegame-title": "遊玩圖片遊戲"
 }
