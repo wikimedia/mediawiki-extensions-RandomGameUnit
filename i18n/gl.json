@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Toliño"
+		]
+	},
+	"game-unit-desc": "Mostra un xogo de imaxes, unha enquisa ou un xogo de preguntas escollido ao chou",
+	"game-unit-poll-title": "Responder unha enquisa",
+	"game-unit-quiz-title": "Xogar ao xogo de preguntas",
+	"game-unit-picturegame-title": "Xogar ao xogo de imaxes"
+}
