@@ -1,8 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Suleiman the Magnificent Television"
+			"Suleiman the Magnificent Television",
+			"Tensama0415"
 		]
 	},
-	"game-unit-desc": "무작위로 선택된 게임, 설문조사 또는 퀴즈를 표시합니다"
+	"game-unit-desc": "무작위로 선택된 게임, 설문조사 또는 퀴즈를 표시합니다",
+	"game-unit-poll-title": "설문조사 시작",
+	"game-unit-quiz-title": "퀴즈 게임을 플레이",
+	"game-unit-picturegame-title": "그림 게임을 플레이"
 }
