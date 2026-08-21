@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wizzard"
+		]
+	},
+	"game-unit-desc": "Zobrazuje náhodne vybranú obrázkovú hru, anketu alebo kvíz",
+	"game-unit-poll-title": "Zúčastnite sa ankety",
+	"game-unit-quiz-title": "Zahrajte si kvíz",
+	"game-unit-picturegame-title": "Zahrajte si obrázkovú hru"
+}
