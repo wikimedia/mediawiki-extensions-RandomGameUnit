@@ -8,11 +8,12 @@
  * @author Aaron Wright <aaron.wright@gmail.com>
  * @author David Pean <david.pean@gmail.com>
  * @author Jack Phoenix
- * @copyright Copyright © 2009-2025 Jack Phoenix
+ * @copyright Copyright © 2009-2026 Jack Phoenix
  * @link https://www.mediawiki.org/wiki/Extension:RandomGameUnit Documentation
  * @license GPL-2.0-or-later
  */
 
+use MediaWiki\Context\RequestContext;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Parser\Parser;
 use MediaWiki\SpecialPage\SpecialPage;
@@ -247,11 +248,7 @@ class RandomGameUnit {
 		}
 
 		$img_width = $wgRandomImageSize;
-		if ( $picturegame['title'] == substr( $picturegame['title'], 0, 48 ) ) {
-			$title_text = $picturegame['title'];
-		} else {
-			$title_text = substr( $picturegame['title'], 0, 48 ) . wfMessage( 'ellipsis' )->text();
-		}
+		$title_text = RequestContext::getMain()->getLanguage()->truncateForVisual( $picturegame['title'], 48 );
 
 		$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
 		$img_one = $repoGroup->findFile( $picturegame['img1'] );
@@ -280,18 +277,15 @@ class RandomGameUnit {
 
 		$pic_game_link = SpecialPage::getTitleFor( 'PictureGameHome' );
 
-		# check PictureGame/PictureGameHome.body.php to see what value of $key should be
-		$key = '';
-
 		$output = '<div class="game-unit-container">
 		<h2>' . wfMessage( 'game-unit-picturegame-title' )->escaped() . '</h2>
 		<div class="pg-unit-title">' . htmlspecialchars( $title_text, ENT_QUOTES ) . '</div>
 		<div class="pg-unit-pictures">
 			<div onmouseout="this.style.backgroundColor = \'\'" onmouseover="this.style.backgroundColor = \'#4B9AF6\'">
-				<a href="' . htmlspecialchars( $pic_game_link->getFullURL( 'picGameAction=renderPermalink&id=' . $picturegame['id'] . '&voteID=' . $picturegame['id'] . '&key=' . $key ) ) . '">' . $imgOne . '</a>
+				<a href="' . htmlspecialchars( $pic_game_link->getFullURL( 'picGameAction=renderPermalink&id=' . $picturegame['id'] ) ) . '">' . $imgOne . '</a>
 			</div>
 			<div onmouseout="this.style.backgroundColor = \'\'" onmouseover="this.style.backgroundColor = \'#FF0000\'">
-				<a href="' . htmlspecialchars( $pic_game_link->getFullURL( 'picGameAction=renderPermalink&id=' . $picturegame['id'] . '&voteID=' . $picturegame['id'] . '&key=' . $key ) ) . '">' . $imgTwo . '</a>
+				<a href="' . htmlspecialchars( $pic_game_link->getFullURL( 'picGameAction=renderPermalink&id=' . $picturegame['id'] ) ) . '">' . $imgTwo . '</a>
 			</div>
 		</div>
 		<div class="visualClear"></div>
